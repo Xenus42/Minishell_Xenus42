@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_envp_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 18:25:08 by lebroue           #+#    #+#             */
-/*   Updated: 2025/11/19 00:05:03 by hadia            ###   ########.fr       */
+/*   Updated: 2025/11/23 17:42:34 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	free_envp_array_at_init(char **envp)
 	free(envp);
 }
 
-void	fill_envp_array(t_data *data)
+int	fill_envp_array(t_data *data)
 {
 	t_env	*tmp;
 	char	*str;
@@ -58,19 +58,20 @@ void	fill_envp_array(t_data *data)
 		{
 			str = ft_strjoin(tmp->key, "=");
 			if (!str)
-				free_all(data, 1, "Error\nMalloc fail\n");
+				return (1);
 			data->envp[i] = ft_strjoin(str, tmp->value);
 			free(str);
 		}
 		if (!data->envp[i])
-			free_all(data, 1, "Error\nMalloc fail in fill_envp_tab \n");
+			return (1);
 		i++;
 		tmp = tmp->next;
 	}
 	data->envp[i] = NULL;
+	return (0);
 }
 
-void	init_envp_array(t_data *data)
+int	init_envp_array(t_data *data)
 {
 	int	i;
 
@@ -79,6 +80,12 @@ void	init_envp_array(t_data *data)
 		free_envp_array_at_init(data->envp);
 	data->envp = ft_calloc((i + 1), sizeof(char *));
 	if (!data->envp)
-		free_all(data, 1, "Error\nMalloc fail in init_envp \n");
-	fill_envp_array(data);
+		return (1);
+	if (fill_envp_array(data) != 0)
+	{
+		free_envp_array_at_init(data->envp);
+		data->envp = NULL;
+		return (1);
+	}
+	return (0);
 }

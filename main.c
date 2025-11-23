@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 23:42:49 by hadia             #+#    #+#             */
-/*   Updated: 2025/11/21 18:02:21 by hadia            ###   ########.fr       */
+/*   Updated: 2025/11/23 17:42:21 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ static int	process_line(t_data *data, char *line)
 	data->cmds = parsing(line, data->env, &data->exit_status);
 	if (!data->cmds)
 		return (0);
-	init_envp_array(data);
+	if (init_envp_array(data) != 0)
+	{
+		free_cmds(data->cmds);
+		cleanup_and_exit(data, line, 1);
+	}
 	data->exit_status = exec_cmd(data, line);
 	if (data->exit_status == -1)
 		cleanup_and_exit(data, line, 1);
@@ -48,7 +52,10 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	envd = NULL;
-	init_lst_env(&envd, env);
+	if (init_lst_env(&envd, env) != 0)
+	{
+		free_lst_env(&envd, true, 1);
+	}
 	data.exit_status = 0;
 	while (1)
 	{

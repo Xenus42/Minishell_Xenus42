@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 21:43:01 by lebroue           #+#    #+#             */
-/*   Updated: 2025/11/19 00:20:38 by hadia            ###   ########.fr       */
+/*   Updated: 2025/11/23 17:43:29 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_data
 /////////////////////////////////
 
 /*INIT_LST_ENV*/
-void					init_lst_env(t_env **envd, char **env);
+int					init_lst_env(t_env **envd, char **env);
 
 /*INIT_MINIMAL_LST_ENV*/
 void					init_minimal_lst_env(t_env **envd);
@@ -71,7 +71,7 @@ int						add_back_env(t_env **envd);
 /////////////////////////////////
 
 /*INIT_ENVP_ARRAY*/
-void					init_envp_array(t_data *data);
+int					init_envp_array(t_data *data);
 
 /*INIT_ENVP_ARRAY UTILS : COUNT_LST_ENV_NODE*/
 int						count_lst_env_node(t_data *data);
@@ -80,7 +80,7 @@ int						count_lst_env_node(t_data *data);
 void					free_envp_array_at_init(char **envp);
 
 /*INIT_ENVP_ARRAY UTILS : FILL_ENVP_ARRAY*/
-void					fill_envp_array(t_data *data);
+int					fill_envp_array(t_data *data);
 
 /////////////////////////////////
 /////// INIT_DATA_STRUCTURE /////

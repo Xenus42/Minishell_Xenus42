@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude -g3 -MMD -MP 
+CFLAGS = -Wall -Wextra -Werror -Iinclude -g3 -MMD -MP
 
 UNAME_S := $(shell uname -s)
 
