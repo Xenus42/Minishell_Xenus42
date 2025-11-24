@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 23:42:49 by hadia             #+#    #+#             */
-/*   Updated: 2025/11/23 17:42:21 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/11/24 10:21:35 by hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	envd = NULL;
 	if (init_lst_env(&envd, env) != 0)
-	{
 		free_lst_env(&envd, true, 1);
-	}
 	data.exit_status = 0;
 	while (1)
 	{
